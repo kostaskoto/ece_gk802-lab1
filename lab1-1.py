@@ -15,8 +15,9 @@ with requests.get('http://'+url+'/') as response:  # το αντικείμενο
     elif reply == 'c':
         r = response.cookies.get_dict()
         if r:
-            print(r)
-            print(response.headers["Set-Cookie"].split(';')[1])            
+            for cookie in response.cookies:  
+                print(cookie.name + " : " + cookie.value)
+                print("The cookie expires in " + str(cookie.expires) + " seconds")       
         else:
             print("The site didn't exchange cookies in this request")
     else:
